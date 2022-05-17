@@ -52,7 +52,7 @@ class Detail extends StatelessWidget {
                   } else if (index == 2) {
                     return ListTile(
                       title: Text('Keywords'),
-                      subtitle: Text(card.light.join("\n")),
+                      subtitle: Text(card.keywords.join("\n")),
                     );
                   } else if (index == 3) {
                     return ListTile(
