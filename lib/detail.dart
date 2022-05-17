@@ -1,22 +1,58 @@
 import 'package:flutter/material.dart';
+import 'tarot.dart';
+import 'string_extensions.dart';
 
 class Detail extends StatelessWidget {
-  const Detail({Key? key}) : super(key: key);
+  final Tarot card;
+
+  const Detail(this.card, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail Route'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
+        appBar: AppBar(
+          title: Text(card.name.toCapitalized()),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset(
+                'images/' + card.image + '.png',
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.topRight,
+                width: 200,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return ListTile(
+                      title: Text('Light'),
+                      subtitle: Text(card.light.join("\n")),
+                    );
+                  } else if (index == 1) {
+                    return ListTile(
+                      title: Text('Shadow'),
+                      subtitle: Text(card.shadow.join("\n")),
+                    );
+                  } else if (index == 2) {
+                    return ListTile(
+                      title: Text('Keywords'),
+                      subtitle: Text(card.light.join("\n")),
+                    );
+                  } else if (index == 3) {
+                    return ListTile(
+                      title: Text('Fortune telling'),
+                      subtitle: Text(card.fortune.join("\n")),
+                    );
+                  } else {
+                    return Text('');
+                  }
+                },
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import 'tarot.dart';
+import 'detail.dart';
+
 class TarotGrid extends StatefulWidget {
   const TarotGrid({Key? key, required this.title}) : super(key: key);
 
@@ -21,22 +24,21 @@ class TarotGrid extends StatefulWidget {
 }
 
 class _TarotGridState extends State<TarotGrid> {
-  int _counter = 0;
   Map? tarotData;
 
-  void _cardSelected() {
+  void _cardSelected(String identifier) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+      print(identifier);
+      var index = images.indexOf(identifier);
+      var data = tarotData!['tarot_interpretations'][index];
 
-  void _imageTapped() {
-    print("image tapped");
+      var tarot = Tarot.fromJson(identifier, data);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Detail(tarot)),
+      );
+    });
   }
 
   var images = [
@@ -118,22 +120,13 @@ class _TarotGridState extends State<TarotGrid> {
     'pentacles-knight',
     'pentacles-queen',
     'pentacles-king',
-
   ];
 
   InkWell makeImage(String image) {
     return InkWell(
         child: Image.asset('images/thumbs/' + image + '.png', fit: BoxFit.fill),
         onTap: () {
-          print(image);
-          var index = images.indexOf(image);
-          print(tarotData!['tarot_interpretations'][index]);
-
-          // FIXME:
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const SecondRoute()),
-          // );
+          _cardSelected(image);
         });
   }
 
@@ -143,9 +136,9 @@ class _TarotGridState extends State<TarotGrid> {
 
   @override
   Widget build(BuildContext context) {
-    var jsonFuture = DefaultAssetBundle.of(context).loadString('data/tarot_interpretations.json');
+    var jsonFuture = DefaultAssetBundle.of(context)
+        .loadString('data/tarot_interpretations.json');
     jsonFuture.then((json) => tarotData = jsonDecode(json));
-    jsonFuture.whenComplete(() => print('loading done...'));
 
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
