@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'tarot.dart';
+import 'fullscreen.dart';
 import 'string_extensions.dart';
 
 class Detail extends StatelessWidget {
   final Tarot card;
 
   const Detail(this.card, {Key? key}) : super(key: key);
+
+  void imageTapped(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Fullscreen(card)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +24,16 @@ class Detail extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset(
-                'images/' + card.image + '.png',
-                fit: BoxFit.fitHeight,
-                alignment: Alignment.topRight,
-                width: 200,
+              ElevatedButton(
+                onPressed: () {
+                  imageTapped(context);
+                },
+                child: Image.asset(
+                  'images/' + card.image + '.png',
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.topRight,
+                  width: 200,
+                ),
               ),
               ListView.builder(
                 shrinkWrap: true,
