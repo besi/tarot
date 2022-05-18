@@ -5,5 +5,6 @@ extension StringCasingExtension on String {
   String toTitleCase() => replaceAll(RegExp(' +'), ' ')
       .split(' ')
       .map((str) => str.toCapitalized())
-      .join(' ');
+      .join(' ')
+      .replaceAll(' Of ', ' of ');
 }

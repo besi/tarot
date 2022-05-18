@@ -19,7 +19,7 @@ class Detail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(card.name.toCapitalized()),
+        title: Text(card.name.toTitleCase()),
       ),
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
