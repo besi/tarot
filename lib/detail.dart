@@ -36,20 +36,20 @@ class Detail extends StatelessWidget {
             ),
           ),
           ListTile(
+            title: Text('Keywords'),
+            subtitle: Text(card.keywords.join(", ")),
+          ),
+          ListTile(
+            title: Text('Fortune telling'),
+            subtitle: Text(card.fortune.join("\n")),
+          ),
+          ListTile(
             title: Text('Light'),
             subtitle: Text(card.light.join("\n")),
           ),
           ListTile(
             title: Text('Shadow'),
             subtitle: Text(card.shadow.join("\n")),
-          ),
-          ListTile(
-            title: Text('Keywords'),
-            subtitle: Text(card.keywords.join("\n")),
-          ),
-          ListTile(
-            title: Text('Fortune telling'),
-            subtitle: Text(card.fortune.join("\n")),
           ),
         ],
       ),
