@@ -51,3 +51,5 @@ app.*.map.json
 /ios/*.p12
 /ios/*.mobileprovision
 /ios/Runner.app.dSYM.zip
+/ios/fastlane/README.md
+/ios/fastlane/report.xml

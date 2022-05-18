@@ -18,54 +18,41 @@ class Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(card.name.toCapitalized()),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  imageTapped(context);
-                },
-                child: Image.asset(
-                  'images/' + card.image + '.png',
-                  fit: BoxFit.fitHeight,
-                  alignment: Alignment.topRight,
-                  width: 200,
-                ),
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return ListTile(
-                      title: Text('Light'),
-                      subtitle: Text(card.light.join("\n")),
-                    );
-                  } else if (index == 1) {
-                    return ListTile(
-                      title: Text('Shadow'),
-                      subtitle: Text(card.shadow.join("\n")),
-                    );
-                  } else if (index == 2) {
-                    return ListTile(
-                      title: Text('Keywords'),
-                      subtitle: Text(card.keywords.join("\n")),
-                    );
-                  } else if (index == 3) {
-                    return ListTile(
-                      title: Text('Fortune telling'),
-                      subtitle: Text(card.fortune.join("\n")),
-                    );
-                  } else {
-                    return Text('');
-                  }
-                },
-              ),
-            ],
+      appBar: AppBar(
+        title: Text(card.name.toCapitalized()),
+      ),
+      body: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              imageTapped(context);
+            },
+            child: Image.asset(
+              'images/' + card.image + '.png',
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.topRight,
+              width: 200,
+            ),
           ),
-        ));
+          ListTile(
+            title: Text('Light'),
+            subtitle: Text(card.light.join("\n")),
+          ),
+          ListTile(
+            title: Text('Shadow'),
+            subtitle: Text(card.shadow.join("\n")),
+          ),
+          ListTile(
+            title: Text('Keywords'),
+            subtitle: Text(card.keywords.join("\n")),
+          ),
+          ListTile(
+            title: Text('Fortune telling'),
+            subtitle: Text(card.fortune.join("\n")),
+          ),
+        ],
+      ),
+    );
   }
 }
