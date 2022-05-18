@@ -13,7 +13,7 @@ class Fullscreen extends StatelessWidget {
         onPressed: () => Navigator.pop(context),
         child: Image.asset(
           'images/' + card.image + '.png',
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.contain,
           height: double.infinity,
           width: double.infinity,
           alignment: Alignment.center,
