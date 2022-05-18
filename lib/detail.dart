@@ -24,7 +24,7 @@ class Detail extends StatelessWidget {
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
         children: [
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               imageTapped(context);
             },
