@@ -9,7 +9,7 @@ class Fullscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ElevatedButton(
+      body: TextButton(
         onPressed: () => Navigator.pop(context),
         child: Image.asset(
           'images/' + card.image + '.png',
