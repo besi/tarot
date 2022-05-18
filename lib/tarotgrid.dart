@@ -1,4 +1,5 @@
 import 'dart:convert';
+import "dart:math";
 
 import 'package:flutter/material.dart';
 
@@ -26,18 +27,22 @@ class TarotGrid extends StatefulWidget {
 class _TarotGridState extends State<TarotGrid> {
   Map? tarotData;
 
+  void showDetail(identifier, data){
+    var tarot = Tarot.fromJson(identifier, data);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Detail(tarot)),
+    );
+  }
+
+
   void _cardSelected(String identifier) {
     setState(() {
       print(identifier);
       var index = images.indexOf(identifier);
       var data = tarotData!['tarot_interpretations'][index];
-
-      var tarot = Tarot.fromJson(identifier, data);
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Detail(tarot)),
-      );
+      showDetail(identifier, data);
     });
   }
 
@@ -151,6 +156,19 @@ class _TarotGridState extends State<TarotGrid> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.auto_fix_high,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              var list = tarotData!['tarot_interpretations'];
+              var index = Random().nextInt(list.length);
+              showDetail(images[index], list[index]);
+            },
+          )
+        ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
