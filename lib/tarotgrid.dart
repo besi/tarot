@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'tarot.dart';
 import 'detail.dart';
+import 'info_page.dart';
 
 class TarotGrid extends StatefulWidget {
   const TarotGrid({Key? key, required this.title}) : super(key: key);
@@ -27,7 +28,7 @@ class TarotGrid extends StatefulWidget {
 class _TarotGridState extends State<TarotGrid> {
   Map? tarotData;
 
-  void showDetail(identifier, data){
+  void showDetail(identifier, data) {
     var tarot = Tarot.fromJson(identifier, data);
 
     Navigator.push(
@@ -35,7 +36,6 @@ class _TarotGridState extends State<TarotGrid> {
       MaterialPageRoute(builder: (context) => Detail(tarot)),
     );
   }
-
 
   void _cardSelected(String identifier) {
     setState(() {
@@ -139,6 +139,13 @@ class _TarotGridState extends State<TarotGrid> {
     return images.map((path) => makeImage(path)).toList();
   }
 
+  showInfo() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const InfoPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var jsonFuture = DefaultAssetBundle.of(context)
@@ -153,8 +160,13 @@ class _TarotGridState extends State<TarotGrid> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        leading: IconButton(
+          onPressed: showInfo,
+          icon: const Icon(
+            Icons.info,
+            color: Colors.white,
+          ),
+        ),
         title: Text(widget.title),
         actions: [
           IconButton(
