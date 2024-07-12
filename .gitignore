@@ -53,3 +53,5 @@ app.*.map.json
 /ios/Runner.app.dSYM.zip
 /ios/fastlane/README.md
 /ios/fastlane/report.xml
+*.ipa
+App.app.dSYM.zip
